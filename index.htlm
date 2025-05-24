@@ -1,0 +1,31 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Salon Dahlia - Réservation</title>
+</head>
+<body>
+  <h1>Bienvenue sur le site de réservation du Salon Dahlia</h1>
+
+  <form id="reservationForm" action="https://formsubmit.co/birindwajkbngwarhamuhero@gmail.com" method="POST" target="_blank">
+    <label for="name">Nom complet :</label><br />
+    <input type="text" id="name" name="Nom" required /><br />
+
+    <label for="phone">Téléphone :</label><br />
+    <input type="tel" id="phone" name="Téléphone" required /><br />
+
+    <label for="email">Email :</label><br />
+    <input type="email" id="email" name="Email" required /><br />
+
+    <label for="date">Date de réservation :</label><br />
+    <input type="date" id="date" name="Date" required /><br />
+
+    <label for="message">Explications :</label><br />
+    <textarea id="message" name="Message" rows="4" required></textarea><br />
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('reservationForm');
