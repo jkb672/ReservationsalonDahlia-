@@ -1,13 +1,116 @@
-```html
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Salon Dahlia</title>
+  <title>Salon Dahlia - Réservation</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("YOUR_PUBLIC_KEY"); // Remplacez par votre clé publique EmailJS
+    })();
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9e6fc;
+      padding: 20px;
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 90%;
+      max-width: 400px;
+    }
+    input, select, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #d05ce3;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      font-weight: bold;cursor: pointer;
+    }
+    .whatsapp {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+    .whatsapp a {
+      display: flex;
+      align-items: center;
+      color: #25D366;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .whatsapp img {
+      height: 24px;
+      margin-right: 8px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue sur le site de réservation du Salon Dahlia</h1>
-  <p>Site en construction.</p>
+
+  <img src="Picsart_25-03-17_09-53-16-186.png" alt="Salon Dahlia Logo" width="150" />
+  <h2>Salon Dahlia - Réservation</h2>
+
+  <form id="reservationForm">
+    <input type="text" name="nom" placeholder="Nom du client *" required />
+    
+    <select name="genre" required>
+      <option value="">Sélectionnez le genre</option>
+      <option value="Homme">Homme</option>
+      <option value="Femme">Femme</option>
+    </select>
+    
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <input type="tel" id="telephone" name="telephone" placeholder="Numéro WhatsApp *" required style="flex: 1;" />
+      <a href="https://wa.me/243975870672" target="_blank" title="Contacter sur WhatsApp">
+        <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" style="width: 30px; height: 30px;" />
+      </a>
+    </div>
+    
+    <input type="email" name="email" placeholder="Adresse email" /><input type="date" name="dateReservation" required />
+    
+    <input type="time" name="heureReservation" value="05:00" min="05:00" max="19:00" required />
+    
+    <input type="text" name="coiffeur" placeholder="Coiffeur (optionnel)" />
+    
+    <textarea name="message" placeholder="Message / Explication..."></textarea>
+    
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <div class="whatsapp">
+    <a href="https://wa.me/243975870672" target="_blank">
+      <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" />
+      Contacter sur WhatsApp
+    </a>
+  </div>
+
+  <script>
+    document.getElementById('reservationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+        .then(() => {
+          alert('Réservation envoyée avec succès !');
+          this.reset();
+        }, (error) => {
+          alert('Erreur lors de l’envoi, veuillez réessayer.');
+          console.error(error);
+        });
+    });
+  </script>
+
 </body>
 </html>
-```
+``
