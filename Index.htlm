@@ -1,0 +1,33 @@
+
+form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Récupérer les valeurs du formulaire
+      const name = form.name.value;
+      const phone = form.phone.value;
+      const email = form.email.value;
+      const date = form.date.value;
+      const message = form.message.value;
+
+      // Construire le message WhatsApp
+      const whatsappMessage = 
+        `Réservation Salon Dahlia:%0A` +
+        `Nom: name
+        `Téléphone:{phone}%0A` +
+        `Email: email
+        `Date:{date}%0A` +
+        `Message: message`;
+
+      // URL WhatsApp avec ton numéro
+      const whatsappURL = `https://wa.me/243999537575?text={whatsappMessage}`;
+
+      // Ouvrir WhatsApp dans un nouvel onglet
+      window.open(whatsappURL, '_blank');
+
+      // Envoyer le formulaire vers Gmail avec FormSubmit
+      form.submit();
+    });
+  </script>
+</body>
+</html>
+```
