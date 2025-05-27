@@ -1,116 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Salon Dahlia - Réservation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réservation Salon Dahlia</title>
+  <!-- Intégration d'EmailJS -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
-    (function() {
-      emailjs.init("YOUR_PUBLIC_KEY"); // Remplacez par votre clé publique EmailJS
+    (function(){
+      emailjs.init("4vDr4o07jKmGCTLLC");
     })();
   </script>
   <style>
+    /* Palette de couleurs inspirée des dahlias */
     body {
+      background-color: #F3E5F5;
+      color: #4A148C;
       font-family: Arial, sans-serif;
-      background-color: #f9e6fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;margin: 0 auto;
       padding: 20px;
+    }
+
+    .logo-container {
       text-align: center;
+      margin-bottom: 20px;
     }
+
+    .logo {
+      width: 150px;
+    }
+
     form {
-      background: white;
+      background-color: #ffffff;
       padding: 20px;
-      border-radius: 10px;
-      display: inline-block;
-      width: 90%;
-      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(106, 27, 154, 0.1);
     }
-    input, select, textarea {
+
+    input, select, button {
       width: 100%;
-      margin: 10px 0;
       padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #d05ce3;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 5px;
-      font-weight: bold;cursor: pointer;
-    }
-    .whatsapp {
       margin-top: 10px;
-      display: flex;
-      justify-content: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
     }
-    .whatsapp a {
-      display: flex;
-      align-items: center;
-      color: #25D366;
-      text-decoration: none;
-      font-weight: bold;
+
+    button {
+      background-color: #6A1B9A;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
     }
-    .whatsapp img {
-      height: 24px;
-      margin-right: 8px;
+
+    button:hover {
+      background-color: #4A148C;
     }
   </style>
 </head>
 <body>
-
-  <img src="Picsart_25-03-17_09-53-16-186.png" alt="Salon Dahlia Logo" width="150" />
-  <h2>Salon Dahlia - Réservation</h2>
-
-  <form id="reservationForm">
-    <input type="text" name="nom" placeholder="Nom du client *" required />
-    
-    <select name="genre" required>
-      <option value="">Sélectionnez le genre</option>
-      <option value="Homme">Homme</option>
-      <option value="Femme">Femme</option>
-    </select>
-    
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <input type="tel" id="telephone" name="telephone" placeholder="Numéro WhatsApp *" required style="flex: 1;" />
-      <a href="https://wa.me/+243999537575" target="_blank" title="Contacter sur WhatsApp">
-        <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" style="width: 30px; height: 30px;" />
-      </a>
+  <div class="container">
+    <div class="logo-container">
+      <img src="Picsart_25-03-17_09-53-16-186.png" alt="Logo Salon Dahlia" class="logo" />
     </div>
-    
-    <input type="email" name="email" placeholder="Adresse email" /><input type="date" name="dateReservation" required />
-    
-    <input type="time" name="heureReservation" value="05:00" min="05:00" max="19:00" required />
-    
-    <input type="text" name="coiffeur" placeholder="Coiffeur (optionnel)" />
-    
-    <textarea name="message" placeholder="Message / Explication..."></textarea>
-    
-    <button type="submit">Envoyer</button>
-  </form>
+    <form id="reservationForm" onsubmit="sendReservation(event)">
+      <input type="text" id="nom" name="nom_client" placeholder="Nom du client" required />
+      <select id="sexe" name="sexe_client" required>
+        <option value="">Sexe</option>
+        <option value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+        <option value="Autre">Autre</option>
+      </select><input type="tel" id="telephone" name="telephone_client" placeholder="Numéro de téléphone" required />
+<input type="email" id="email" name="user_email" placeholder="Votre Email" required />
+<input type="text" id="service" name="service_choisi" placeholder="Coiffeur / Service" required />
+<select id="heure" name="heure_reservation" required>
+  <option value="">Heure</option>
+  <option value="5h00">5h00</option>
+  <option value="6h00">6h00</option>
+  <option value="7h00">7h00</option>
+  <option value="9h">9h</option>
+  <option value="10h">10h</option>
+  <option value="12h">12h</option>
+  <option value="14h">14h</option>
+</select>
+<button type="submit">Envoyer Réservation</button>
+</form>
+</div>
 
-  <div class="whatsapp">
-    <a href="https://wa.me/+243999537575" target="_blank">
-      <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" />
-      Contacter sur WhatsApp
-    </a>
-  </div>
+<script>
+  function sendReservation(event) {
+    event.preventDefault();
+    
+    const nom = document.getElementById('nom').value;
+    const sexe = document.getElementById('sexe').value;
+    const telephone = document.getElementById('telephone').value;
+    const email = document.getElementById('email').value;
+    const service = document.getElementById('service').value;
+    const heure = document.getElementById('heure').value;
+    
+    const templateParams = {
+        user_email: email,nom_client: nom,
+        sexe_client: sexe,
+        telephone_client: telephone,
+        service_choisi: service,
+        heure_reservation: heure
+      };
 
-  <script>
-    document.getElementById('reservationForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-        .then(() => {
+      emailjs.send('service_q9js1jn', 'template_x2zl7ey', templateParams)
+        .then(function(response) {
           alert('Réservation envoyée avec succès !');
-          this.reset();
-        }, (error) => {
-          alert('Erreur lors de l’envoi, veuillez réessayer.');
-          console.error(error);
+          document.getElementById('reservationForm').reset();
+        }, function(error) {
+          alert('Erreur lors de l\'envoi : ' + JSON.stringify(error));
         });
-    });
+    }
   </script>
-
 </body>
 </html>
-``
+```
